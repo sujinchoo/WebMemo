@@ -7,15 +7,19 @@
 </head>
 <body>
     <h1>메모장</h1>
-    <ul>
-        {% for note in notes %}
-            <li>{{ note }}</li>
-        {% endfor %}
-    </ul>
-    <form method="POST" action="/add_note">
-        <label for="note">메모 추가:</label>
-        <input type="text" id="note" name="note" required>
+    <form method="POST" action="/add_memo">
+        <label for="content">메모 추가:</label>
+        <input type="text" id="content" name="content" required>
         <button type="submit">추가</button>
     </form>
+    <ul>
+        {% for memo in memos %}
+            <li>
+                {{ memo.content }}
+                <a href="{{ url_for('edit_memo', memo_id=memo.id) }}">수정</a>
+                <a href="{{ url_for('delete_memo', memo_id=memo.id) }}">삭제</a>
+            </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
